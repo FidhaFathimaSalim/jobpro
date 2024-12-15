@@ -1,9 +1,9 @@
 # views.py
 from django.shortcuts import render
 from django.http import HttpResponse
-import pandas as pd
-import joblib
-from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd # type: ignore
+import joblib # type: ignore
+from sklearn.feature_extraction.text import TfidfVectorizer # type: ignore
 from sklearn.metrics.pairwise import cosine_similarity
 #doing joblib
 class JobRecommender:
