@@ -49,7 +49,7 @@ class JobRecommender:
             exit(1)
 
 # Load the data
-file_path = 'C:\\Users\\huawei\\Desktop\\job\\hirehub\\jobportal\\job_dataset.csv'  # Replace with your actual file path
+file_path = 'C:\\Users\\huawei\\Desktop\\jobpro\\hirehub\\jobportal\\job_dataset.csv'  # Replace with your actual file path
 job_data = JobRecommender.load_data(file_path)
 
 # Create an instance of the recommender
