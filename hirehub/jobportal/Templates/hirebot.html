@@ -1,13 +1,30 @@
-<!-- myapp/templates/hirebot.html -->
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Hirebot</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Hirebot</h1>
-    <p>This is the hirebot page.</p>
+    <div class="chat-container">
+        <div class="user-chat-box">
+            <img src="images/user-6380868_1280.png"alt="" id="userImage" width="50">
+            <div class="user-chat-area">
+                hi hirebot
+            </div>
+        </div>
+        <div class="ai-chat-box">
+            <img src="images/ai.png"alt="" id="aiImage" width="50">
+            <div class="ai-chat-area">
+                hi user
+            </div>
+        </div>
+    </div>
+    <div class="prompt-area">
+
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
+
