@@ -25,6 +25,10 @@
 
   <!-- Main CSS File -->
   <link href="{% static 'css/work1.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}"> <!-- Link to chatbot CSS -->
+  <!-- Google Fonts Link For Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 
 </head>
 
@@ -53,59 +57,44 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
-
       <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-
         <div class="carousel-item active">
           <img src="{% static 'images/hero-carousel/hero-carousel-1.jpg' %}" alt="">
           <div class="carousel-container">
             <h2>WELCOME TO HIREHUB<br></h2>
             <p>This presents a comprehensive labor hiring management system enhanced with advanced features including skill transformer and a hirebot facility which assist you for 24/7.</p>
-            <a href="#about" class="btn-get-started">Read More</a>
+            <a href="#about" class="btn-get-started">Read More </a>
           </div>
         </div><!-- End Carousel Item -->
-
       </div>
-
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
     <section id="about" class="about section">
-
       <div class="container">
-
         <div class="row gy-4">
-
           <div class="col-lg-5 position-relative" data-aos="fade-up" data-aos-delay="200">
             <img src="{% static 'images/about.jpg' %}" class="img-fluid" alt=""> 
           </div>
-
-          <div class="col-lg-7 content ps-lg-4" data-aos="fade-up" data-aos -delay="100">
+          <div class="col-lg-7 content ps-lg-4" data-aos="fade-up" data-aos-delay="100">
             <h3>About Us</h3>
             <p>
               HIREHUB is dedicated to helping organizations and individuals identify and bridge skill gaps. Our advanced analytics and AI-driven recommendations ensure that you stay ahead in your career or business. Here, Skill Transformer, which includes a feature for conducting real-time skill gap analysis, allows organizations to assess the current skills of their workforce against the skills needed for specific roles or projects. A learning recommendation sets the project apart by not only identifying skill gaps but also suggesting personalized learning paths for employees to bridge those gaps. Last but not least, the integration of a hirebot enhances user interaction by providing instant responses to queries related to job openings, skill requirements, and resume building.
             </p>
           </div>
-
         </div>
-
       </div>
-
     </section><!-- /About Section -->
 
     <!-- Services Section -->
     <section id="services" class="services section">
-
-      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Services</h2>
         <div><span>Check Our</span> <span class="description-title">Services</span></div>
       </div><!-- End Section Title -->
 
       <div class="container">
-
         <div class="row gy-4">
-
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
             <div class="service1">
               <img alt="Skill Transformer" height="250" src="https://storage.googleapis.com/a1aa/image/Zg5u9s5veXSCIKpnW7Iyk8MZoLapkdQQ8UWeajvwFmhbdI4TA.jpg" width="400"/>
@@ -115,8 +104,7 @@
                 <button><a href="{% url 'recommend_jobs' %}" class="readmore stretched-link"><span>GET STARTED</span><i class="bi bi-arrow-right"></i></a></button>
               </section>
             </div>
-          </div>
-          <!-- End Service Item -->
+          </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="service1">
@@ -128,16 +116,12 @@
               </section>
             </div>
           </div><!-- End Service Item -->
-
         </div>
-
       </div>
-
     </section><!-- /Services Section -->
   </main>
 
   <footer id="footer" class="footer dark-background">
-
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
@@ -149,7 +133,7 @@
           </div>
           <div class="social-links d-flex mt-4">
             <a href=""><i class="bi bi-github"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href=""><i class=" bi bi-linkedin"></i></a>
           </div>
         </div>
 
@@ -188,6 +172,31 @@
   <script src="{% static 'glightbox/js/glightbox.min.js' %}"></script>
   <!-- Main JS File -->
   <script src="{% static 'js/main.js' %}"></script>
+
+  <!-- Chatbot JS -->
+  <script src="{% static 'js/chat.js' %}" defer></script> <!-- Link to chatbot JS -->
+
+  <!-- Chatbot HTML -->
+  <button class="chatbot-toggler">
+    <span class="material-symbols-rounded">mode_comment</span>
+    <span class="material-symbols-outlined">close</span>
+  </button>
+  <div class="chatbot">
+    <header>
+      <h2>Chatbot</h2>
+      <span class="close-btn material-symbols-outlined">close</span>
+    </header>
+    <ul class="chatbox">
+      <li class="chat incoming">
+        <span class="material-symbols-outlined">smart_toy</span>
+        <p>Hi there <br>How can I help you today?</p>
+      </li>
+    </ul>
+    <div class="chat-input">
+      <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+      <span id="send-btn" class="material-symbols-rounded">send</span>
+    </div>
+  </div>
 
 </body>
 
