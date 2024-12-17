@@ -510,6 +510,10 @@
     object-fit: cover;
     z-index: 0;
   }
+  .carousel-fade .carousel-item.active {
+    z-index: 0;
+    opacity: 1;
+}
   
   .hero .carousel-item {
     position: absolute;
