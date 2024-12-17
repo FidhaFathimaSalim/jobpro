@@ -44,7 +44,7 @@ body.show-chatbot .chatbot-toggler span:last-child {
     right: 84px;
     bottom: 54px;
     width: 420px;
-    background: #989494;
+    background: #cbc6c6;
     border-radius: 15px;
     overflow: hidden;
     opacity: 0;
@@ -131,8 +131,8 @@ header h2 {
   background: #f8d7da;
 }
 .chatbox .incoming p {
-  color: #fff;
-  background: #989494;
+  color: #0a0a0a;
+  background: #f8d7da;
 }
 .chatbot .chat-input {
   display: flex;
