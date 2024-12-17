@@ -132,7 +132,7 @@ header h2 {
 }
 .chatbox .incoming p {
   color: #0a0a0a;
-  background: #f8d7da;
+  background: #fff;
 }
 .chatbot .chat-input {
   display: flex;
@@ -140,7 +140,7 @@ header h2 {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: #989494;
+  background: #fff;
   padding: 3px 20px;
   border-top: 1px solid #ddd;
 }
