@@ -620,28 +620,61 @@
   /*--------------------------------------------------------------
   # About Section
   --------------------------------------------------------------*/
-  .about{
-    background-color: #20262b;
-  }
-  .about .content h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ffffff;
-  }
-
-  .about .content p:last-child {
-    margin-bottom: 0;
-    color: #fff;
-    word-spacing: 20px;
-    line-height: 30px;
+  #about-us {
+    margin-top: 1.5rem;
+    display: block;
   }
   
-  .about .pulsating-play-btn {
-    position: absolute;
-    left: calc(50% - 47px);
-    top: calc(50% - 47px);
+  .about-title.h1{
+    color:#f9f9f9;
+    text-align: center;
   }
-   
+  .box-container {
+    font-family: 'Poppins';
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 2.5rem;
+    margin-top: 3.125rem;
+    margin-bottom: 3.125rem;
+    animation: scrollReveal ease-in-out both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+  
+  .box-container div {
+    background: #262626;
+    padding: 2.5rem;
+    font-size: 0.8125rem;
+    font-weight: 300;
+    transition: background 0.5s ease, transform 0.5s ease;
+  }
+  
+  .box-container div i {
+    font-size: 3.125rem;
+  }
+  
+  .box-container div h2 {
+    font-size: 1.875rem;
+    font-weight: 500;
+    margin-top: 1.875rem;
+    margin-bottom: 0.9375rem;
+    transition: color 0.5s ease;
+    color: #ffffff;
+  }
+  
+  .box-container div p {
+    font-size: 1.25rem;
+    text-align: start;
+    color: #ffffff;
+  }
+  
+  .box-container div:hover {
+  transform: translateY(-10px);
+  }
+  
+  .box-container div:hover > h2{
+  color: #0b62aa;
+  }
   /*--------------------------------------------------------------
   # Services Section
   --------------------------------------------------------------*/
