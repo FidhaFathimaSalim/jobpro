@@ -624,9 +624,8 @@
     margin-top: 1.5rem;
     display: block;
   }
-  
-  .about-title.h1{
-    color:#f9f9f9;
+  h1{
+    color: #f9f9f9;
     text-align: center;
   }
   .box-container {
