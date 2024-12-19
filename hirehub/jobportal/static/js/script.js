@@ -2,11 +2,29 @@ let prompt=document.querySelector("#prompt")
 let chatContainer=document.querySelector(".chat-container")
 const API_KEY = "AIzaSyBdVNTdrfjHvb-IKMBACdlkJzvd_r4SETE"; // Your API key here
 const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=${API_KEY}`;
+
 let user={
     data:null,
 }
 
+async function generateResponse(aiChatBox) {
 
+   let RequestOption={
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            contents: [{ 
+                role: "user", 
+                parts: [{ text: userMessage }] 
+              }] 
+            })
+   }
+    
+
+ let response=fetch(API_URL,RequestOption)
+
+
+}
 
 
 function createChatBox(html,classes){
