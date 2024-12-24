@@ -1,30 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Hirebot</title>
-    <link rel="stylesheet" href="hire.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!-- Favicons -->
+<link href="{% static 'images/favicon.ico' %}" rel="icon">
+<link href="{% static 'images/apple-touch-icon.png' %}" rel="apple-touch-icon">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+    
+          <a href="{% url 'work' %}"  class="logo d-flex align-items-center">
+             <img src="{% static 'images/logoo.svg' %}" alt="">
+            <h1 class="sitename">HIREHUB</h1>
+          </a>
+    <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'work' %}" class="active">Home</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+</div>
+</header>
     <div class="chat-container">
     <div class="ai-chat-box">
-            <img src="ai.png"alt="" id="aiImage" width="50">
+            <img src="{% static 'images/ai.png' %}"alt="" id="aiImage" width="50">
             <div class="ai-chat-area">
-                hi user
+                Hi,how can I assist you?
             </div>
         </div>
         <div class="user-chat-box">
-            <img src="user-6380868_1280.png"alt="" id="userImage" width="50">
+            <img src="{% static 'images/user-6380868_1280.png'%}"alt="" id="userImage" width="50">
             <div class="user-chat-area">
-                hi hirebot
             </div>
         </div>
         
     </div>
     <div class="prompt-area">
         <input type="text" id="prompt" placeholder="Message...">
-        <button id="submit"><img src="C:\Users\huawei\Desktop\jobpro\hirehub\jobportal\static\images\arrow-up-line.svg" alt=""></button>
+        <button id="submit"><img src="{% static 'images/arrow-up-line.svg'%}" alt=""></button> 
     </div>
     <script src="script.js"></script>
 </body>

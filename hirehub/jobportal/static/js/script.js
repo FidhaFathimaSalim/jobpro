@@ -1,4 +1,5 @@
 let prompt = document.querySelector("#prompt");
+let submitbtn = document.querySelector("#submit");
 let chatContainer = document.querySelector(".chat-container");
 const API_KEY = "AIzaSyBdVNTdrfjHvb-IKMBACdlkJzvd_r4SETE"; // Your API key here
 const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=${API_KEY}`;
@@ -68,4 +69,8 @@ prompt.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && prompt.value.trim() !== "") { // Check for non-empty input
         handleChatResponse(prompt.value);
     }
-});
+})
+
+submitbtn.addEventListener("click",()=>{
+    handleChatResponse(prompt.value);
+})
