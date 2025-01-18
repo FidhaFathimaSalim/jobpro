@@ -585,7 +585,7 @@
     letter-spacing: 1px;
     display: inline-block;
     padding: 8px 32px;
-    border-radius: 4px;
+    border-radius: 20px;
     transition: 0.4s;
     margin: 10px;
     animation: fadeInUp 1s both 0.4s;
