@@ -548,6 +548,9 @@
     flex-direction: column;
     z-index: 3;
   }
+  .hero h1{
+    font-weight: bold;
+  }
   
   .hero h4 {
     margin-bottom: 84px;
