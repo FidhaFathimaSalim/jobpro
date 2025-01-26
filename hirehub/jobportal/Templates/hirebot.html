@@ -28,24 +28,20 @@
 
 </head>
 
-<body >
+<body>
     <div class="chat-container">
-        <div class="ai-chat-box">
-            <img src="{% static 'images/ai.png' %}"alt="" id="aiImage" width="50">
-            <div class="ai-chat-area">
-                Hi,how can I assist you?
-            </div>
-        </div>
-        <div class="user-chat-box">
-            <img src="{% static 'images/user-6380868_1280.png'%}"alt="" id="userImage" width="50">
-            <div class="user-chat-area">
-            </div>
-        </div>
+<div class="ai-chat-box">
+<img src="ai.png" alt="" id="aiImage"width="70">
+<div class="ai-chat-area">
+    Hi there! How can I help you today?
+</div>
+
+</div>
     </div>
     <div class="prompt-area">
-        <input type="text" id="prompt" placeholder="Message...">
-        <button id="submit"><img src="{% static 'images/arrow-up-line.svg'%}" alt=""></button> 
+<input type="text" id="prompt" placeholder="Message.....">
+<button id="submit"><img src="arrow-up-line.svg"></button>
     </div>
-    <script src="{% static 'js/script.js'%}"></script>
-  </body>
-  </html>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

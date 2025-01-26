@@ -1,75 +1,71 @@
-let prompt = document.querySelector("#prompt");
-let submitbtn = document.querySelector("#submit");
-let chatContainer = document.querySelector(".chat-container");
-const API_KEY = "AIzaSyBdVNTdrfjHvb-IKMBACdlkJzvd_r4SETE"; 
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+let prompt=document.querySelector('#prompt')
+let chatContainer=document.querySelector('.chat-container')
 
-let user = {
-    data: null,
-};
-
+const Api_Url="https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAVlqYB5MSmxTKK-aTgEopWf85tVG3r0qM"
+let user={
+    data:null,
+}
 async function generateResponse(aiChatBox) {
-    let text = aiChatBox.querySelector(".ai-chat-area")
-    let requestOption = {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            contents: [{
-                role: "user",
-                parts: [{ text: user.data }]
-            }]
-        })
-    };
-    try {
-        let response = await fetch(API_URL, requestOption);
-        let data = await response.json();
+let text=aiChatBox.querySelector(".ai-chat-area")
+let RequestOption={
+    method:"POST",
+    headers:{'Content-Type': 'application/json'},
+    body:JSON.stringify({
+        "contents": [
+            { "parts":[{"text": user.data}
 
-        let aiResponse = data.candidates[0].contents.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim()
-        let html = `<img src="ai.png" alt="" id="aiImage" width="50">
-                    <div class="ai-chat-area">${aiResponse}</div>`;
-        aiChatBox.innerHTML = html; 
-        console.log(aiResponse);
-    } catch (error) {
-        console.log(error);
-    } finally {
-        chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' })
-    }
+            ]
+        }]
+    })
+}
+try{
+    let response= await fetch(Api_Url,RequestOption)
+    let data=await response.json()
+    let apiResponse=data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g,"$1").trim()
+    text.innerHTML=apiResponse
+}
+catch(error){
+    console.log(error);
+}
+finally{
+    chatContainer.scrollTo({top:chatContainer.scrollHeight,behavior:"smooth"})
+}
 }
 
-function createChatBox(html, classes) {
-    let div = document.createElement("div");
-    div.innerHTML = html;
-    div.classList.add(classes); 
-    return div;
+function createChatBox(html,classes){
+    let div=document.createElement("div")
+    div.innerHTML=html
+    div.classList.add(classes)
+    return div
 }
 
-function handleChatResponse(message) {
-    user.data = message;
-    let html = `<img src="user-6380868_1280.png" alt="" id="userImage" width="50">
-                <div class="user-chat-area">${user.data}</div>`;
-    prompt.value = ""; 
-    let userChatBox = createChatBox(html, "user-chat-box");
-    chatContainer.appendChild(userChatBox);
-    chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' })
-    setTimeout(() => {
-        let html = `<img src="ai.png" alt="" id="aiImage" width="50">
-                    <div class="ai-chat-area">
-                      <img src="load.webp" alt="" class="load" width="50px">
-                    </div>`;
-        let aiChatBox = createChatBox(html, "ai-chat-box");
-        chatContainer.appendChild(aiChatBox);
-        generateResponse(aiChatBox);
-    }, 600);
+function handlechatResponse(message){
+    user.data=message
+    let html=`<img src="user-6380868_1280.png" alt="" id="userImage" width="100">
+<div class="user-chat-area">
+${user.data}
+</div>`
+prompt.value=""
+let userChatBox=createChatBox(html,"user-chat-box")
+chatContainer.appendChild(userChatBox)
+chatContainer.scrollTo({top:chatContainer.scrollHeight,behavior:"smooth"})
+setTimeout(()=>{
+let html='<img src="ai.png" alt="" id="aiImage" width="70"><div class="ai-chat-area"><img src="load.webp" alt="" class="load" width="50px"></div>'
+let aiChatBox=createChatBox(html,"ai-chat-box")
+chatContainer.appendChild(aiChatBox)
+generateResponse(aiChatBox)
+},600)
 }
 
-prompt.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && prompt.value.trim() !== "") { 
-        handleChatResponse(prompt.value);
-    }
-})
+function createChatBox(html,classes){
+    let div=document.createElement("div")
+    div.innerHTML=html
+    div.classList.add(classes)
+    return div
+}
 
-submitbtn.addEventListener("click", () => {
-    if (prompt.value.trim() !== "") { 
-        handleChatResponse(prompt.value);
+prompt.addEventListener("keydown",(e)=>{
+    if(e.key=="Enter"){
+        handlechatResponse(prompt.value)
     }
 })
