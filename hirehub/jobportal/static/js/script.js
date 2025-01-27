@@ -41,7 +41,7 @@ function createChatBox(html,classes){
 
 function handlechatResponse(message){
     user.data=message
-    let html=`<img src="user-6380868_1280.png" alt="" id="userImage" width="100">
+    let html=`<img src="{% static 'images/user-6380868_1280.png' %}" alt="" id="userImage" width="100">
 <div class="user-chat-area">
 ${user.data}
 </div>`

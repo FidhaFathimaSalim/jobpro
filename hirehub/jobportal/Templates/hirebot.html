@@ -24,14 +24,34 @@
   <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/work1.css' %}" rel="stylesheet">
 
 </head>
 
-<body>
+<body class="inpage">
+
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+    <a href="{% url 'work' %}"  class="logo d-flex align-items-center">
+       <img src="{% static 'images/logoo.svg' %}" alt="">
+      <h1 class="sitename">HIREHUB</h1>
+    </a>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="{% url 'work' %}" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+  </div>
+</header>
+
     <div class="chat-container">
 <div class="ai-chat-box">
-<img src="ai.png" alt="" id="aiImage"width="70">
+<img src="{% static 'images/ai.png' %}" alt="" id="aiImage"width="70">
 <div class="ai-chat-area">
     Hi there! How can I help you today?
 </div>
@@ -40,7 +60,7 @@
     </div>
     <div class="prompt-area">
 <input type="text" id="prompt" placeholder="Message.....">
-<button id="submit"><img src="arrow-up-line.svg"></button>
+<button id="submit"><img src="{% static 'images/arrow-up-line.svg' %}"></button>
     </div>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
