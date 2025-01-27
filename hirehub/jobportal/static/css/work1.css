@@ -548,9 +548,6 @@
     flex-direction: column;
     z-index: 3;
   }
-  .hero h1{
-    font-weight: bold;
-  }
   
   .hero h4 {
     margin-bottom: 84px;
@@ -560,15 +557,17 @@
     animation: fadeInDown 1s both;
 }
   
-  @media (max-width: 768px) {
-    .hero h2 {
-      font-size: 30px;
-      animation: fadeInUp 2s both 0.4s;
-    }
-  }
+   
+.hero h2 {
+  font-size: 50px;
+  animation: fadeInUp 2s both 0.4s;
+  font-family: fantasy;
+}
+  
   
   .hero p {
     animation: fadeInDown 1s both 0.2s;
+  
   }
   
   @media (min-width: 1024px) {
@@ -719,11 +718,13 @@
   .services .service-item .readmore {
     display: flex;
     align-items: center;
+    height: 31px;
+    width: 118px;
     color: color-mix(in srgb, var(--default-color), transparent 50%);
     transition: 0.3s;
     font-weight: 700;
     font-size: 14px;
-  }
+}
   
   .services .service-item .readmore i {
     margin-left: 8px;
