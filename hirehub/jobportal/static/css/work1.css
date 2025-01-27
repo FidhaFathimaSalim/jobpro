@@ -762,6 +762,10 @@
     border-radius: 20px;
     cursor: pointer;
 }
+button {
+  color: cornflowerblue;
+  border-radius: 20px;
+}
   
   button:hover {
       background-color: rgb(29, 22, 28);
