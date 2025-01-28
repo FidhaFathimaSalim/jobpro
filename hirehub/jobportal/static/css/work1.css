@@ -813,7 +813,8 @@
   position: relative;
   top: 77px;
 }
-.user-chat-box{
+.user-chat-box {
+  top: 76px;
   width: 60%;
   position: relative;
   left: 40%;
@@ -866,9 +867,9 @@
   color: white;
   font-size: 20px;
 }
-.prompt-area button{
-  width: 70px;
-  height: 50px;
+.prompt-area button {
+  width: 78px;
+  height: 81px;
   border-radius: 50%;
   background-color: black;
   border: none;

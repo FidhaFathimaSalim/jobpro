@@ -1,9 +1,12 @@
 # views.py
 from django.shortcuts import render
 from django.http import HttpResponse
-import pandas as pd # type: ignore
-import joblib # type: ignore
-from sklearn.feature_extraction.text import TfidfVectorizer # type: ignore
+from django.http import JsonResponse
+from fuzzywuzzy import fuzz
+import google.generativeai as genai
+import pandas as pd 
+import joblib 
+from sklearn.feature_extraction.text import TfidfVectorizer 
 from sklearn.metrics.pairwise import cosine_similarity
 #doing joblib
 class JobRecommender:
@@ -70,5 +73,79 @@ def recommend_jobs(request):
     
     return render(request, 'recommend_jobs.html')
 
+
+# Load the dataset
+dataset = pd.read_csv('C:\\Users\\huawei\\Desktop\\jobpro\\hirehub\\jobportal\\job_dataset.csv',encoding='utf-8')
+ 
+# Configure the Generative AI model
+genai.configure(api_key="AIzaSyBdVNTdrfjHvb-IKMBACdlkJzvd_r4SETE")
+instruction = "you are a chatbot which provide a job openings, resume building, skill requirements. it also provide a course recommendation using the below dataset"
+model = genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
+
+def get_course_recommendations(keywords):
+    """
+    Function to get course recommendations based on keywords.
+    """
+    keywords = keywords.lower().split()
+    relevant_courses = []
+
+    for _, row in dataset.iterrows():
+        course_name = row['Title'].lower()
+        course_url = row['URL'].lower()
+
+        # Calculate the score based on the keywords in Title and URL
+        title_score = max(fuzz.partial_ratio(keyword, course_name) for keyword in keywords)
+        url_score = max(fuzz.partial_ratio(keyword, course_url) for keyword in keywords)
+
+        # Combine scores to get a final score
+        total_score = title_score + url_score
+
+        # Check if the total score exceeds the threshold
+        if total_score > 120:  # Adjust this threshold as needed
+            relevant_courses.append((row['Title'], row['URL'], total_score))
+
+    # Sort the relevant courses by score in descending order
+    relevant_courses.sort(key=lambda x: x[2], reverse=True)
+    top_courses = relevant_courses[:5]  # Get the top 5 courses
+
+    # Prepare the result for output
+    if top_courses:
+        result = "Recommended courses based on your query:\n"
+        for course, url, score in top_courses:
+            result += f"- {course}\n  URL: {url}\n  Relevance Score: {score}\n"
+        return result
+    return "I couldn't find any relevant courses. Please try with different keywords."
+
+def get_job_openings(query):
+    """
+    Function to get job openings based on a query.
+    """
+    openings = dataset[dataset['job_title'].str.contains(query, case=False)]
+    if not openings.empty:
+        return openings.to_string(index=False)
+    return "I couldn't find any job openings matching your query."
+
+def chatbot_response(message):
+    """
+    Function to handle chatbot responses.
+    """
+    if 'course ' in message.lower():
+        return get_course_recommendations(message)
+    elif 'job openings' in message.lower():
+        return get_job_openings(message)
+    else:
+        response = model.start_chat().send_message(message)
+        return response.text
+
 def hirebot(request):
-    return render(request, 'hirebot.html')
+    """
+    View function to handle chat interactions.
+    """
+    if request.method == 'POST':
+        user_message = request.POST.get('message')
+        if user_message.lower() == 'bye':
+            return JsonResponse({'response': 'goodbye!'})
+        response = chatbot_response(user_message)
+        return JsonResponse({'response': response})
+
+    return render(request, 'hirebot.html') 

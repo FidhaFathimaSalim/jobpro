@@ -1,5 +1,6 @@
 let prompt=document.querySelector('#prompt')
 let chatContainer=document.querySelector('.chat-container')
+let sendButton = document.querySelector('#submit');
 
 const Api_Url="https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAVlqYB5MSmxTKK-aTgEopWf85tVG3r0qM"
 let user={
@@ -50,7 +51,11 @@ let userChatBox=createChatBox(html,"user-chat-box")
 chatContainer.appendChild(userChatBox)
 chatContainer.scrollTo({top:chatContainer.scrollHeight,behavior:"smooth"})
 setTimeout(()=>{
-let html='<img src="ai.png" alt="" id="aiImage" width="70"><div class="ai-chat-area"><img src="load.webp" alt="" class="load" width="50px"></div>'
+    let html = `
+    <img src="{% static 'images/ai.png' %}" alt="" id="aiImage" width="70">
+    <div class="ai-chat-area">
+        <img src="{% static 'images/load.webp' %}" alt="" class="load" width="50px">
+    </div>`
 let aiChatBox=createChatBox(html,"ai-chat-box")
 chatContainer.appendChild(aiChatBox)
 generateResponse(aiChatBox)
@@ -69,3 +74,8 @@ prompt.addEventListener("keydown",(e)=>{
         handlechatResponse(prompt.value)
     }
 })
+sendButton.addEventListener("click", () => {
+    if (prompt.value.trim() !== "") {
+        handlechatResponse(prompt.value);
+    }
+});
