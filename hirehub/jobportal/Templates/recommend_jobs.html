@@ -74,8 +74,8 @@
                 <ul>
                     {% for job in recommended_jobs %}
                       <li>
-                          <strong>Title:</strong> {{ job.Title }}<br>
-                          <button class="rec"><a href="{{ job.URL }}">Link</a></button>
+                        <div class="job-title">{{ job.Title }}</div>
+                        <a href="{{ job.URL }}" class="job-link" target = "_blank">Visit Here</a>      
                       </li>
                     {% endfor %}
                 </ul>

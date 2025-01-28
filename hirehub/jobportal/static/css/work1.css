@@ -550,8 +550,8 @@
   }
   
   .hero h4 {
-    margin-bottom: 84px;
-    margin-top: 52px;
+    margin-bottom: 0px;
+    margin-top: 24px;
     font-size: 48px;
     font-weight: 700;
     animation: fadeInDown 1s both;
@@ -740,8 +740,8 @@
     ..........................................*/
     form {
       margin: 0;
-      margin-top: -91px;
-      margin-bottom: -97px;
+      margin-top: -6px;
+      margin-bottom: -56px;
   }
   
   label {
@@ -755,13 +755,32 @@
       margin-bottom: 10px;
   }
   
-  .rec {
-    padding: 2px 15px;
-    color: #0b85f1;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
+  .job-title {
+    background-color: #edc983c4;
+    padding: 10px;
+    border-radius: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 600px;
+    max-width: 600px;
+    margin-right: 10px;
+    color: black;
 }
+  
+  
+.job-link {
+  padding: 10px 20px;
+  background-color: #826c50;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 11px;
+  transition: background-color 0.3s;
+  margin-left: 615px;
+}
+  
+  .job-link:hover {
+    background-color: #3a5c71;
+  }
+
 .recg{
   color: cornflowerblue;
   border-radius: 20px;
@@ -775,11 +794,11 @@
   }
   
   #results {
-    margin-top: 123px;
-    padding: 10px;
+    margin-top: 67px;
+    padding: 0px;
     border: 1px solid #ffffff;
     color: wheat;
-    width: 839px;
+    width: 778px;
 }
 
 
