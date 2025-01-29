@@ -2,7 +2,7 @@ let prompt = document.querySelector('#prompt');
 let chatContainer = document.querySelector('.chat-container');
 let sendButton = document.querySelector('#submit');
 
-const apiUrl = "/hirebot/";  
+const apiUrl = "/hirebot/"; // take url of views.py 
 
 let user = {
     data: null,
