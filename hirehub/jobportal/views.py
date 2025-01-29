@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from fuzzywuzzy import fuzz
+import json
 import google.generativeai as genai
 import pandas as pd 
 import joblib 
@@ -73,11 +74,18 @@ def recommend_jobs(request):
     
     return render(request, 'recommend_jobs.html')
 
-# Load the dataset
+# Load your dataset (make sure the path is correct in your local environment)
 dataset = pd.read_csv('C:\\Users\\huawei\\Desktop\\jobpro\\hirehub\\jobportal\\job_dataset.csv')
- 
 
+# Configure the generative AI model
+genai.configure(api_key="AIzaSyBdVNTdrfjHvb-IKMBACdlkJzvd_r4SETE")
+instruction = "You are a chatbot which provides job openings, resume building, skill requirements. It also provides course recommendations using the below dataset."
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    system_instruction=instruction
+)
 
+# Function to get course recommendations based on user input
 def get_course_recommendations(keywords):
     """
     Function to get course recommendations based on keywords.
@@ -112,6 +120,7 @@ def get_course_recommendations(keywords):
         return result
     return "I couldn't find any relevant courses. Please try with different keywords."
 
+# Function to get job openings based on a query
 def get_job_openings(query):
     """
     Function to get job openings based on a query.
@@ -121,6 +130,7 @@ def get_job_openings(query):
         return openings.to_string(index=False)
     return "I couldn't find any job openings matching your query."
 
+# Function to handle general chatbot responses
 def chatbot_response(message):
     """
     Function to handle chatbot responses.
@@ -130,18 +140,31 @@ def chatbot_response(message):
     elif 'job openings' in message.lower():
         return get_job_openings(message)
     else:
-        response = start_chat().send_message(message)
+        # If message doesn't match, call the generative AI model for general conversation
+        response = model.start_chat().send_message(message)
         return response.text
 
+# Hirebot view to handle chat interactions
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt  # Exempt CSRF check for the sake of development (use proper CSRF token in production)
 def hirebot(request):
     """
     View function to handle chat interactions.
     """
     if request.method == 'POST':
-        user_message = request.POST.get('message')
+        # Extract the message from the request body
+        data = json.loads(request.body)
+        user_message = data.get('message', '')
+
+        # If the user types "bye", end the chat
         if user_message.lower() == 'bye':
             return JsonResponse({'response': 'goodbye!'})
+
+        # Get the chatbot response for the message
         response = chatbot_response(user_message)
+
+        # Return the response to the frontend
         return JsonResponse({'response': response})
 
     return render(request, 'hirebot.html')
