@@ -8,7 +8,7 @@ import pandas as pd
 import joblib 
 from sklearn.feature_extraction.text import TfidfVectorizer 
 from sklearn.metrics.pairwise import cosine_similarity
-#doing joblib
+
 class JobRecommender:
     def __init__(self, job_data):
         self.job_data = job_data
@@ -73,14 +73,10 @@ def recommend_jobs(request):
     
     return render(request, 'recommend_jobs.html')
 
-
 # Load the dataset
-dataset = pd.read_csv('C:\\Users\\huawei\\Desktop\\jobpro\\hirehub\\jobportal\\job_dataset.csv',encoding='utf-8')
+dataset = pd.read_csv('C:\\Users\\huawei\\Desktop\\jobpro\\hirehub\\jobportal\\job_dataset.csv')
  
-# Configure the Generative AI model
-genai.configure(api_key="AIzaSyBdVNTdrfjHvb-IKMBACdlkJzvd_r4SETE")
-instruction = "you are a chatbot which provide a job openings, resume building, skill requirements. it also provide a course recommendation using the below dataset"
-model = genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
+
 
 def get_course_recommendations(keywords):
     """
@@ -134,7 +130,7 @@ def chatbot_response(message):
     elif 'job openings' in message.lower():
         return get_job_openings(message)
     else:
-        response = model.start_chat().send_message(message)
+        response = start_chat().send_message(message)
         return response.text
 
 def hirebot(request):
@@ -148,4 +144,4 @@ def hirebot(request):
         response = chatbot_response(user_message)
         return JsonResponse({'response': response})
 
-    return render(request, 'hirebot.html') 
+    return render(request, 'hirebot.html')
