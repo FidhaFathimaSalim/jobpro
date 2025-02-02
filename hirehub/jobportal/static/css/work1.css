@@ -10,7 +10,7 @@
     --background-color: #ffffff;
     --default-color: #444444; 
     --heading-color: #394047; 
-    --accent-color: #428bca; 
+    --accent-color: #42b328; 
     --surface-color: #ffffff;
     --contrast-color: #ffffff; 
   }
@@ -18,7 +18,7 @@
   /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
   :root {
     --nav-color: #ffffff;  /* The default color of the main navmenu links */
-    --nav-hover-color: #428bca; /* Applied to main navmenu links when they are hovered over or active */
+    --nav-hover-color: #42b328; /* Applied to main navmenu links when they are hovered over or active */
     --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
     }
   
@@ -653,7 +653,7 @@
   
   .box-container div i {
     font-size: 3.125rem;
-    color:lightskyblue;
+    color:#42b328;
   }
   
   .box-container div h2 {
@@ -676,7 +676,7 @@
   }
   
   .box-container div:hover > h2{
-  color: #0b62aa;
+  color: #42b328;
   }
   /*--------------------------------------------------------------
   # Services Section
@@ -787,7 +787,7 @@
   }
 
 .recg{
-  color: cornflowerblue;
+  color: #42b328;
   border-radius: 20px;
 }
   
