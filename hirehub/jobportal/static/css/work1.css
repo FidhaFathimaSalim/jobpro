@@ -718,8 +718,8 @@
   .services .service-item .readmore {
     display: flex;
     align-items: center;
-    height: 31px;
-    width: 118px;
+    height: 38px;
+    width: 124px;
     color: color-mix(in srgb, var(--default-color), transparent 50%);
     transition: 0.3s;
     font-weight: 700;

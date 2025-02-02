@@ -111,7 +111,7 @@ header h2 {
   text-align: center;
   line-height: 32px;
   align-self: flex-end;
-  background: #3c3e3f;
+  background: #42b328;
   border-radius: 4px;
   margin: 0 10px 7px 0;
 }
@@ -157,7 +157,7 @@ header h2 {
 }
 .chat-input span {
   align-self: flex-end;
-  color: #3c3e3f;
+  color: #42b328;
   cursor: pointer;
   height: 55px;
   display: flex;
