@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.cv-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cv-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.cv-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.cv-header p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.cv-section {
+    margin-bottom: 2rem;
+}
+
+.cv-section h2 {
+    color: black;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.cv-section h3 {
+    margin: 0;
+    color: #333;
+}
+
+.cv-section div {
+    margin-bottom: 1rem;
+}
+
+.cv-section p {
+    margin: 0.5rem 0;
+}
+
+.dates{
+    display: inline;
+    float: right;
+}
+
+.title{
+    font-weight: 600;
+}
+
+.download{
+    float: right;
+    margin-top: 10px;
+}
+
+.create{
+    float: left;
+    margin-top: 10px;
+}
+
+.download a, .create a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.download a:hover, .create a:hover  {
+    background-color: #f0f0f0;
+}

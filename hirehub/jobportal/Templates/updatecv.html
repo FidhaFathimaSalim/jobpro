@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Profile</title>
+    <link rel="stylesheet" href="{% static 'CSS/update.css' %}">
+</head>
+<body>
+
+    <h1>Update Resume</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <h2>Profile</h2>
+        <label for="full_name">Full Name:</label>
+        <input type="text" id="full_name" name="full_name" value="{{profile.full_name}}" required><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{{profile.address}}"  required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{profile.email}}"  required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" value="{{profile.phone}} " required><br>
+
+        <label for="summary">Summary:</label>
+        <input type="text" id="summary" name="summary" value="{{profile.summary}} " required><br>
+
+        <h2>Education</h2>
+        <label for="school">School:</label>
+        <input type="text" id="school" name="school" value="{{profile.school}} " required><br>
+
+        <label for="school_gpa">School GPA:</label>
+        <input type="number" step="0.01" id="school_gpa" name="school_gpa" value="{{profile.school_gpa}}" ><br>
+
+        <label for="school_joined_date">School Joined Year:</label>
+        <input type="text" id="school_joined_year" name="school_joined_year" value="{{profile.school_joined_year}}"><br>
+
+        <label for="school_left_year">School Left Year:</label>
+        <input type="text" id="school_left_year" name="school_left_year" value="{{profile.school_left_year}}"><br>
+
+        <label for="college">College:</label>
+        <input type="text" id="college" name="college" value="{{profile.college}}" required><br>
+
+        <label for="college_gpa">College GPA:</label>
+        <input type="number" step="0.01" id="college_gpa" name="college_gpa" value="{{profile.college_gpa}}"><br>
+
+        <label for="stream">Stream:</label>
+        <select id="stream" name="stream" value="{{profile.stream}}" required>
+            <option value="Science">Science</option>
+            <option value="Management">Management</option>
+            <option value="Humanities">Humanities</option>
+        </select><br>
+
+        <label for="college_joined_year">College Joined Year:</label>
+        <input type="text" id="college_joined_year" name="college_joined_year" value="{{profile.college_joined_year}}"><br>
+
+        <label for="college_left_date">College Left Year:</label>
+        <input type="text" id="college_left_year" name="college_left_year" value="{{profile.college_left_year}}"><br>
+
+        <label for="university">University:</label>
+        <input type="text" id="university" name="university" value="{{profile.university}}" required><br>
+
+        <label for="university_gpa">University GPA:</label>
+        <input type="number" step="0.01" id="university_gpa" name="university_gpa" value="{{profile.university_gpa}}"><br>
+
+        <label for="university_faculty">University Faculty:</label>
+        <input type="text" id="university_faculty" name="university_faculty" value="{{profile.university_faculty}}" required><br>
+
+        <label for="university_joined_year">University Joined Year:</label>
+        <input type="text" id="university_joined_year" name="university_joined_year" value="{{profile.university_joined_year}}"><br>
+
+        <label for="university_left_year">University Left Year</label>
+        <input type="text" id="university_left_year" name="university_left_year" value="{{profile.university_left_year}}"><br>
+
+        <h2>Projects</h2>
+        <label for="project">Project:</label>
+        <input type="text" id="project" name="project" value="{{profile.project}}"><br>
+
+        <label for="project_description">Project Description:</label>
+        <input type="text" id="project_description" name="project_description" value="{{profile.project_description}}"><br>
+
+        <label for="project_link">Project Link:</label>
+        <input type="text" id="project_link" name="project_link" value="{{profile.project_link}}"><br>
+
+        <h2>Skills</h2>
+        <label for="technical_skills">Technical Skills:</label>
+        <input type="text" id="technical_skills" name="technical_skills" value="{{profile.technical_skills}}"><br>
+
+        <label for="nontechnical_skills">Non-Technical Skills:</label>
+        <input type="text" id="nontechnical_skills" name="nontechnical_skills" value="{{profile.nontechnical_skills}}"><br>
+
+        <h2>Language</h2>
+        <label for="language">Language:</label>
+        <input type="text" id="language" name="language" value="{{profile.language}}"><br>
+
+        <h2>Reference</h2>
+        <label for="reference_name">Name:</label>
+        <input type="text" id="reference_name" name="reference_name" value="{{profile.reference_name}}"><br>
+
+        <label for="reference_position">Position:</label>
+        <input type="text" id="reference_position" name="reference_position" value="{{profile.reference_position}}"><br>
+
+        <label for="reference_organization">Organization:</label>
+        <input type="text" id="reference_organization" name="reference_organization" value="{{profile.reference_organization}}"><br>
+
+        <label for="reference_email">Email:</label>
+        <input type="email" id="reference_email" name="reference_email" value="{{profile.reference_email}}"><br>
+
+        <label for="reference_phone">Phone:</label>
+        <input type="text" id="reference_phone" name="reference_phone" value="{{profile.reference_phone}}"><br>
+
+        <button type="submit">Update CV</button>
+    </form>
+</body>
+</html>

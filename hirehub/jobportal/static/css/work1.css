@@ -734,6 +734,9 @@
   .services .service-item:hover .readmore {
     color: var(--accent-color);
   }
+  .service2{
+    margin-left: 70px;
+  }
 
   /*..........................................
     #recommend_job.html

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .delete-container {
+            background: #fff;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .delete-container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .delete-container p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .delete-container form {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div class="delete-container">
+        <h1>Confirm Deletion</h1>
+        <p>Are you sure you want to delete {{ profile.full_name }}'s profile?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" >Yes, delete</button>
+            <a href="{% url 'cv_view' profile.id %}" class="btn btn-success">No, go back</a>
+        </form>
+    </div>
+</body>
+</html>
