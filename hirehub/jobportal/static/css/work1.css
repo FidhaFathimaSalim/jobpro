@@ -10,7 +10,7 @@
     --background-color: #ffffff;
     --default-color: #444444; 
     --heading-color: #394047; 
-    --accent-color: #42b328; 
+    --accent-color:#008cff ; 
     --surface-color: #ffffff;
     --contrast-color: #ffffff; 
   }
@@ -18,7 +18,7 @@
   /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
   :root {
     --nav-color: #ffffff;  /* The default color of the main navmenu links */
-    --nav-hover-color: #42b328; /* Applied to main navmenu links when they are hovered over or active */
+    --nav-hover-color: #008cff; /* Applied to main navmenu links when they are hovered over or active */
     --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
     }
   
@@ -147,11 +147,11 @@
     .navmenu a:focus {
       color: var(--nav-color);
       padding: 18px 15px;
-      font-size: 13px;
+      font-size: 15px;
       font-family: var(--nav-font);
       text-transform: uppercase;
-      font-weight: 500;
-      display: flex;
+      font-weight: bold;
+      display: block;
       align-items: center;
       justify-content: space-between;
       white-space: nowrap;
@@ -173,10 +173,14 @@
     .navmenu li:hover>a,
     .navmenu .active,
     .navmenu .active:focus {
-      color: var(--nav-hover-color);
+      background: linear-gradient(to top right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
     }
-
-  }
+    }
   
   /* Navmenu - Mobile */
   @media (max-width: 1199px) {
@@ -241,13 +245,23 @@
   
     .navmenu a i:hover,
     .navmenu a:focus i:hover {
-      background-color: var(--accent-color);
+      background: linear-gradient(to  right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
     }
   
     .navmenu a:hover,
     .navmenu .active,
     .navmenu .active:focus {
-      color: var(--accent-color);
+        background: linear-gradient(to  right,#008cff,#ff00ae);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all 0.3s ease;
+        color: transparent;
     }
   
     .navmenu .active i,
@@ -337,12 +351,17 @@
   }
   
   .footer .social-links a:hover {
-    color: var(--accent-color);
-    border-color: var(--accent-color);
+      background: linear-gradient(to top right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
+
   }
   
   .footer h4 {
-    font-size: 16px;
+    font-size: 23px;
     font-weight: bold;
     position: relative;
     padding-bottom: 12px;
@@ -378,10 +397,16 @@
     color: color-mix(in srgb, var(--default-color), transparent 30%);
     display: inline-block;
     line-height: 1;
+    font-size: 20px;
   }
   
   .footer .footer-links ul a:hover {
-    color: var(--accent-color);
+      background: linear-gradient(to top right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
   }
   
   .footer .footer-contact p {
@@ -422,8 +447,12 @@
   }
   
   .scroll-top:hover {
-    background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
-    color: var(--contrast-color);
+      background: linear-gradient(to top right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
   }
   
   .scroll-top.active {
@@ -569,7 +598,12 @@
     animation: fadeInDown 1s both 0.2s;
   
   }
-  
+  .hero p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 21px;
+    text-align: center;
+}
   @media (min-width: 1024px) {
   
     .hero h2,
@@ -580,21 +614,32 @@
   
   .hero .btn-get-started {
     color: var(--contrast-color);
-    background: var(--accent-color);
-    font-family: var(--heading-font);
-    font-weight: 500;
-    font-size: 15px;
-    letter-spacing: 1px;
-    display: inline-block;
-    padding: 8px 32px;
-    border-radius: 20px;
+    background:#161a20;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 2em;
+    border-radius: 1000px;
     transition: 0.4s;
-    margin: 10px;
     animation: fadeInUp 1s both 0.4s;
+    position: relative;
   }
   
+  .hero .btn-get-started::after{
+    content: '';
+    position: absolute;
+    height: 107%;
+    width: 102%;
+    border-radius: 1000px;
+    background-image: linear-gradient(to bottom right,#008cff,#ff00ae);
+    z-index: -1;
+  }
+
   .hero .btn-get-started:hover {
-    background: color-mix(in srgb, var(--accent-color), transparent 20%);
+    z-index: 0;
+    box-shadow: 40px 0 100px #008cff,-40px 0 100px #ff00ae;
   }
   @keyframes fadeInUp {
     from {
@@ -645,7 +690,9 @@
   
   .box-container div {
     background: #495057;
-    padding: 2.5rem;
+    margin: 0px 40px;
+    padding: 0 2.5rem ;
+    border-radius: 20px;
     font-size: 0.8125rem;
     font-weight: 300;
     transition: background 0.5s ease, transform 0.5s ease;
@@ -653,7 +700,7 @@
   
   .box-container div i {
     font-size: 3.125rem;
-    color:#42b328;
+    color:#008cff;
   }
   
   .box-container div h2 {
@@ -676,7 +723,12 @@
   }
   
   .box-container div:hover > h2{
-  color: #42b328;
+      background: linear-gradient(to top right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
   }
   /*--------------------------------------------------------------
   # Services Section
@@ -725,14 +777,29 @@
     font-weight: 700;
     font-size: 14px;
 }
-  
+.img-sec {
+  vertical-align: middle;
+  border-radius: 75px;
+}
   .services .service-item .readmore i {
     margin-left: 8px;
   }
-  
+
+  .get-sec {
+    border-radius: 18px;
+    height: 53px;
+    width: 165px;
+    padding-left: 20px;
+}
+
   .services .service-item:hover .title,
   .services .service-item:hover .readmore {
-    color: var(--accent-color);
+      background: linear-gradient(to bottom right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
   }
   .service2{
     margin-left: 87px;
@@ -763,7 +830,7 @@
   }
   
   .job-title {
-    background-color: #edc983c4;
+    background-color: #faf9f6c4;
     padding: 10px;
     margin: 8px;
     border-radius: 14px;
@@ -777,7 +844,7 @@
   
 .job-link {
   padding: 10px 20px;
-  background-color: #826c50;
+  background-color: #615e5e;
   color: #fff;
   text-decoration: none;
   border-radius: 11px;
@@ -786,19 +853,30 @@
 }
   
   .job-link:hover {
-    background-color: #3a5c71;
-  }
+      background: linear-gradient(to top right,#008cff,#ff00ae);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      color: transparent;
+    }
 
 .recg{
-  color: #42b328;
+  color: #008cff;
   border-radius: 20px;
+  height:40px;
 }
   
   button:hover {
-      background-color: rgb(29, 22, 28);
+    background: linear-gradient(to top right,#008cff,#ff00ae);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+    color: transparent;
   }
   ul{
-    color: wheat;
+    color: white;
   }
   #results li {
     display: flex;
@@ -808,7 +886,7 @@
     margin-top: 67px;
     padding: 0px;
     border: 1px solid #ffffff;
-    color: wheat;
+    color: white;
     width: 778px;
 }
 
