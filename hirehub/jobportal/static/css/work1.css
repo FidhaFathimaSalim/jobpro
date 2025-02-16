@@ -830,15 +830,12 @@
   }
   
   .job-title {
-    background-color: #faf9f6c4;
-    padding: 10px;
-    margin: 8px;
-    border-radius: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    min-width: 600px;
-    max-width: 600px;
-    margin-right: 10px;
-    color: black;
+    padding: 14px;
+    min-width: 631px;
+    max-width: 638px;
+    margin-right: -357px;
+    margin-top: -46px;
+    color: white;
 }
   
   
@@ -848,8 +845,9 @@
   color: #fff;
   text-decoration: none;
   border-radius: 11px;
+  margin-top: 24px;
+  margin-left: -258px;
   transition: background-color 0.3s;
-  margin-left: 12px;
 }
   
   .job-link:hover {
@@ -865,6 +863,7 @@
   color: #008cff;
   border-radius: 20px;
   height:40px;
+  width: 250px;
 }
   
   button:hover {
@@ -882,12 +881,12 @@
     display: flex;
     align-items: center;
 }
-  #results {
-    margin-top: 67px;
-    padding: 0px;
-    border: 1px solid #ffffff;
-    color: white;
-    width: 778px;
+#results {
+  margin-top: 67px;
+  padding: 0px;
+  border: 1px solid #ffffff;
+  color: white;
+  width: 778px;
 }
 
 
