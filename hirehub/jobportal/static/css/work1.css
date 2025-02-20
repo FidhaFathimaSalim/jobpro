@@ -447,12 +447,8 @@
   }
   
   .scroll-top:hover {
-      background: linear-gradient(to top right,#008cff,#ff00ae);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: all 0.3s ease;
-      color: transparent;
+    background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+    color: var(--contrast-color);
   }
   
   .scroll-top.active {

@@ -25,6 +25,22 @@ body {
   background: #2d97d8;
   transition: all 0.2s ease;
 }
+.chatbot-toggler:hover{
+  position: fixed;
+  bottom: 12px;
+  right: 15px;
+  outline: none;
+  border: none;
+  height: 43px;
+  width: 43px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14%;
+  background: #2d97d8;
+  transition: all 0.2s ease;
+}
 body.show-chatbot .chatbot-toggler {
   transform: rotate(90deg);
 }
@@ -32,6 +48,7 @@ body.show-chatbot .chatbot-toggler {
   color: #fff;
   position: absolute;
 }
+
 .chatbot-toggler span:last-child,
 body.show-chatbot .chatbot-toggler span:first-child  {
   opacity: 0;
