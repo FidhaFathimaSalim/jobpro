@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile CV</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.cv-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cv-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.cv-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.cv-header p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.cv-section {
+    margin-bottom: 2rem;
+}
+
+.cv-section h2 {
+    color: black;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.cv-section h3 {
+    margin: 0;
+    color: #333;
+}
+
+.cv-section div {
+    margin-bottom: 1rem;
+}
+
+.cv-section p {
+    margin: 0.5rem 0;
+}
+
+.dates{
+    display: inline;
+    float: right;
+}
+
+.title{
+    font-weight: 600;
+}
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <header class="cv-header">
+            <h1>{{ profile.full_name }}</h1>
+            <p>{{ profile.address }}</p>
+            <p>{{ profile.email }}</p>
+            <p>{{ profile.phone }}</p>
+        </header>
+        
+        <section class="cv-section">
+            <h2>Personal Statement</h2><hr>
+            <p>{{ profile.summary }}</p>
+        </section>
+
+        <section class="cv-section">
+            <h2>Education</h2><hr>
+            <div>
+            <div>
+                <h3>{{ profile.university_faculty }}</h3>
+                <p><i>{{ profile.university }}</i>({{ profile.university_gpa }} GPA) <span class="dates">{{ profile.university_joined_year }} - {{ profile.university_left_year }}  </span> </p>
+            </div>
+            <div>
+                <h3>Higher Secondary School(+2,{{ profile.stream }})</h3>
+                <p><i>{{ profile.college }}</i>({{ profile.college_gpa }} GPA) <span class="dates"> {{ profile.college_joined_year }} - {{ profile.college_left_year }}</span></p>
+            </div>
+                <h3>Secondary School</h3>
+                <p><i>{{ profile.school }}</i>({{ profile.school_gpa }} GPA) <span class="dates"> {{ profile.school_joined_year }} - {{ profile.school_left_year }}<span></p>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2>Projects</h2><hr>
+            <div>
+                <h3>{{ profile.project }}</h3>
+                <p> <span class="title">Description: </span>{{ profile.project_description }}</p>
+                <p><span class="title">Project Link: </span> {{ profile.project_link }}</p>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2>Skills</h2><hr>
+            <div>
+                <h3>Technical Skills</h3>
+                <p>{{ profile.technical_skills }}</p>
+            </div>
+            <div>
+                <h3>Non-Technical Skills</h3>
+                <p>{{ profile.nontechnical_skills }}</p>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2>Languages</h2><hr>
+            <p>{{ profile.language }}</p>
+        </section>
+
+        <section class="cv-section">
+            <h2>References</h2><hr>
+            <div>
+                <p>{{ profile.reference_name }}</p>
+                <p>{{ profile.reference_position }}</p>
+                <p>{{ profile.reference_organization }}</p>
+                <p>{{ profile.reference_email }}</p>
+                <p>{{ profile.reference_phone }}</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
