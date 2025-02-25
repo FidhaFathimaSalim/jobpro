@@ -104,12 +104,26 @@
 
         <section class="cv-section">
             <h2>Projects</h2><hr>
+            {% for project in profile.projects %}
             <div>
-                <h3>{{ profile.project }}</h3>
-                <p> <span class="title">Description: </span>{{ profile.project_description }}</p>
-                <p><span class="title">Project Link: </span> {{ profile.project_link }}</p>
+                <h3>{{ project.project }}</h3>
+                <p> <span class="title">Description: </span>{{ project.project_description }}</p>
+                <p><span class="title">Project Link: </span> {{ project.project_link }}</p>
             </div>
+            {% endfor %}
         </section>
+        
+        <section class="cv-section">
+            <h2>Certificates</h2><hr>
+            {% for certificate in profile.certificates %}
+            <div>
+                <h3>{{ certificate.certificate }}</h3>
+                <p> <span class="title">Description: </span>{{ certificate.certificate_description }}</p>
+            </div>
+            {% endfor %}
+        </section>
+        
+
 
         <section class="cv-section">
             <h2>Skills</h2><hr>
@@ -125,7 +139,9 @@
 
         <section class="cv-section">
             <h2>Languages</h2><hr>
-            <p>{{ profile.language }}</p>
+            {% for language in profile.languages %}
+            <p>{{ language.language }}</p>
+            {% endfor %}
         </section>
 
         <section class="cv-section">

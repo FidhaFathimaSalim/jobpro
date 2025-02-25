@@ -1,15 +1,14 @@
 # views.py
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
-from django.http import HttpResponse
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from fuzzywuzzy import fuzz
 import json
 import google.generativeai as genai
-import pandas as pd 
-import joblib 
-from sklearn.feature_extraction.text import TfidfVectorizer 
+import pandas as pd
+import joblib
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from .models import Profile
+from .models import Profile, Project, Certificate, Language
 import pdfkit
 from django.template import loader 
 
@@ -175,7 +174,7 @@ def hirebot(request):
 
 def cv_create(request):
     if request.method == 'POST':
-        # Retrieve form data
+        # Retrieve form data for Profile
         full_name = request.POST.get('full_name')
         address = request.POST.get('address')
         email = request.POST.get('email')
@@ -195,27 +194,8 @@ def cv_create(request):
         university_faculty = request.POST.get('university_faculty')
         university_joined_year = request.POST.get('university_joined_year')
         university_left_year = request.POST.get('university_left_year')
-        project = request.POST.get('project')
-        project_description = request.POST.get('project_description')
-        project_link = request.POST.get('project_link')
-
-        # current_company = request.POST.get('current_company')
-        # current_position = request.POST.get('current_position')
-        # current_work_description = request.POST.get('current_work_description')
-        # current_joined_date = request.POST.get('current_joined_date')
-        # previous_company = request.POST.get('previous_company')
-        # previous_position = request.POST.get('previous_position')
-        # previous_work_description = request.POST.get('previous_work_description')
-        # previous_joined_date = request.POST.get('previous_joined_date')
-        # previous_left_date = request.POST.get('previous_left_date')     
-        # project_two = request.POST.get('project_two')
-        # project_two_description = request.POST.get('project_two_description')
-        # project_three = request.POST.get('project_three')
-        # project_three_description = request.POST.get('project_three_description')
-
         technical_skills = request.POST.get('technical_skills')
         nontechnical_skills = request.POST.get('nontechnical_skills')
-        language = request.POST.get('language')
         reference_name = request.POST.get('reference_name')
         reference_position = request.POST.get('reference_position')
         reference_organization = request.POST.get('reference_organization')
@@ -243,54 +223,73 @@ def cv_create(request):
             university_faculty=university_faculty,
             university_joined_year=university_joined_year,
             university_left_year=university_left_year,
-            project=project,
-            project_description=project_description,
-            project_link=project_link,
-            # current_company=current_company,
-            # current_position=current_position,
-            # current_work_description=current_work_description,
-            # current_joined_date=current_joined_date,
-            # previous_company=previous_company,
-            # previous_position=previous_position,
-            # previous_work_description=previous_work_description,
-            # previous_joined_date=previous_joined_date,
-            # previous_left_date=previous_left_date,
-            # project_two=project_two,
-            # project_two_description=project_two_description,
-            # project_three=project_three,
-            # project_three_description=project_three_description,
             technical_skills=technical_skills,
             nontechnical_skills=nontechnical_skills,
-            language=language,
             reference_name=reference_name,
             reference_position=reference_position,
             reference_organization=reference_organization,
             reference_email=reference_email,
-            reference_phone=reference_phone
+            reference_phone=reference_phone,
         )
 
-        profile.save()
-        return redirect('cv_view', profile_id=profile.id)  # Redirect to a view page of submitted data
+        # Process Projects
+        for project in request.POST.getlist('projects[][project]'):
+            project_description = request.POST.get(f'projects[][project_description]')
+            project_link = request.POST.get(f'projects[][project_link]')
+            Project.objects.create(
+                profile=profile,
+                project_name=project,
+                project_description=project_description,
+                project_link=project_link
+            )
+
+        # Process Certificates
+        for certificate in request.POST.getlist('certificates[][certificate]'):
+            certificate_description = request.POST.get(f'certificates[][certificate_description]')
+            Certificate.objects.create(
+                profile=profile,
+                certificate_name=certificate,
+                certificate_description=certificate_description
+            )
+
+        # Process Languages
+        for language in request.POST.getlist('languages[][language]'):
+            Language.objects.create(
+                profile=profile,
+                language_name=language
+            )
+
+        return redirect('cv_view', profile_id=profile.id)
 
     return render(request, 'index.html')
 
-
 def cv_download(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
+    projects = profile.projects.all()
+    certificates = profile.certificates.all()
+    languages = profile.languages.all()
+
     template = loader.get_template('pdf.html')
-    html = template.render({'profile': profile})
-    
-    config = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")  
+    context = {
+        'profile': profile,
+        'projects': projects,
+        'certificates': certificates,
+        'languages': languages,
+    }
+    html = template.render(context)
+
+    config = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
     options = {
         'page-size': 'A4',
         'encoding': 'UTF-8',
     }
-    
+
     pdf = pdfkit.from_string(html, False, options=options, configuration=config)
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
-    
+
     return response
+
 
 def cv_view(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
