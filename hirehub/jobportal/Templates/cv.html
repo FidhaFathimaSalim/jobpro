@@ -13,6 +13,7 @@
         <a href="{% url 'cv_update' profile.id %}" class="btn btn-primary">Update CV</a>
     </div>
     <div class="download">
+        <a href="{% url 'work' %}" class="active">Home</a>
         <a href="{% url 'cv_download' profile.id %}" class="btn btn-warning">Download CV</a>
         <a href="{% url 'cv_delete' profile.id %}" class="btn btn-warning">Delete CV</a>
     </div>

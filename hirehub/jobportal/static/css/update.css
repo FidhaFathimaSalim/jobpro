@@ -86,3 +86,43 @@ button[type="submit"]:hover {
 .remove-project:hover, .remove-language:hover {
     background-color: #da190b;
 }
+/* Add this to your CSS file (style.css or work1.css) */
+.header-container {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    justify-content: space-between; /* Space out the items */
+    padding: 10px 20px; /* Add some padding */
+    background-color: #f8f9fa; /* Optional: Add a background color */
+    border-bottom: 1px solid #ddd; /* Optional: Add a border */
+}
+
+.header-container .logo img {
+    height: 50px; /* Adjust the height of the logo */
+}
+
+.header-container h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 24px; /* Adjust the font size */
+    flex-grow: 1; /* Allow the heading to take up remaining space */
+    text-align: center; /* Center the heading */
+}
+
+.header-container .navmenu ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header-container .navmenu ul li {
+    margin-left: 20px; /* Add spacing between nav items */
+}
+
+.header-container .list {
+    margin-left: auto; /* Push the CV Downloads button to the right */
+}
+.navmenu {
+    padding: 0px;
+    margin-right: 18px;
+}
