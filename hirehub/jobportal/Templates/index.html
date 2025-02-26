@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Create Profile</title>
-    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -82,14 +82,20 @@
         <input type="text" id="university_left_year" name="university_left_year"><br><br>
 
         <h2>Projects</h2>
-        <label for="project">Project:</label>
-        <input type="text" id="project" name="project"><br>
+        <div id="projects">
+            <div class="project">
+                <label for="project">Project:</label>
+                <input type="text" id="project" name="project[]"><br>
 
-        <label for="project_description">Project Description:</label>
-        <textarea id="project_description" name="project_description"></textarea><br>
+                <label for="project_description">Project Description:</label>
+                <textarea id="project_description" name="project_description[]"></textarea><br>
 
-        <label for="project_link">Project Link:</label>
-        <input type="text" id="project_link" name="project_link"><br><br>
+                <label for="project_link">Project Link:</label>
+                <input type="text" id="project_link" name="project_link[]"><br>
+                <button type="button" class="remove-project">Remove Project</button><br><br>
+            </div>
+        </div>
+        <button type="button" id="add-project">Add Project</button><br><br>
 
         <h2>Skills</h2>
         <label for="technical_skills">Technical Skills:</label>
@@ -99,8 +105,14 @@
         <input type="text" id="nontechnical_skills" name="nontechnical_skills"><br><br>
 
         <h2>Language</h2>
-        <label for="language">Language:</label>
-        <input type="text" id="language" name="language"><br><br>
+        <div id="languages">
+            <div class="language">
+                <label for="language">Language:</label>
+                <input type="text" id="language" name="language[]"><br>
+                <button type="button" class="remove-language">Remove Language</button><br><br>
+            </div>
+        </div>
+        <button type="button" id="add-language">Add Language</button><br><br>
 
         <h2>Reference</h2>
         <label for="reference_name">Name:</label>
@@ -120,5 +132,7 @@
 
         <button type="submit">Submit</button>
     </form>
+
+    <script src="{% static 'js/cv.js' %}"></script>
 </body>
 </html>

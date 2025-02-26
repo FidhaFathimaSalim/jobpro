@@ -65,3 +65,29 @@ button[type="submit"]:hover {
     float: right;
     margin-top: 10px;
 }
+/* New styles for add/remove buttons */
+#add-project, #add-language {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-project:hover, #add-language:hover {
+    background-color: #45a049;
+}
+
+.remove-project, .remove-language {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-project:hover, .remove-language:hover {
+    background-color: #da190b;
+}

@@ -6,70 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile CV</title>
     <style>
-    body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-.cv-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    background: #fff;
-    padding: 2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        .cv-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-.cv-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
+        .cv-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-.cv-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-}
+        .cv-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
 
-.cv-header p {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 600;
-}
+        .cv-header p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
 
-.cv-section {
-    margin-bottom: 2rem;
-}
+        .cv-section {
+            margin-bottom: 2rem;
+        }
 
-.cv-section h2 {
-    color: black;
-    display: inline-block;
-    margin-bottom: 0;
-    margin-top: 0;
-}
+        .cv-section h2 {
+            color: black;
+            display: inline-block;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
 
-.cv-section h3 {
-    margin: 0;
-    color: #333;
-}
+        .cv-section h3 {
+            margin: 0;
+            color: #333;
+        }
 
-.cv-section div {
-    margin-bottom: 1rem;
-}
+        .cv-section div {
+            margin-bottom: 1rem;
+        }
 
-.cv-section p {
-    margin: 0.5rem 0;
-}
+        .cv-section p {
+            margin: 0.5rem 0;
+        }
 
-.dates{
-    display: inline;
-    float: right;
-}
+        .dates {
+            display: inline;
+            float: right;
+        }
 
-.title{
-    font-weight: 600;
-}
+        .title {
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -89,25 +89,31 @@
         <section class="cv-section">
             <h2>Education</h2><hr>
             <div>
-            <div>
-                <h3>{{ profile.university_faculty }}</h3>
-                <p><i>{{ profile.university }}</i>({{ profile.university_gpa }} GPA) <span class="dates">{{ profile.university_joined_year }} - {{ profile.university_left_year }}  </span> </p>
-            </div>
-            <div>
-                <h3>Higher Secondary School(+2,{{ profile.stream }})</h3>
-                <p><i>{{ profile.college }}</i>({{ profile.college_gpa }} GPA) <span class="dates"> {{ profile.college_joined_year }} - {{ profile.college_left_year }}</span></p>
-            </div>
-                <h3>Secondary School</h3>
-                <p><i>{{ profile.school }}</i>({{ profile.school_gpa }} GPA) <span class="dates"> {{ profile.school_joined_year }} - {{ profile.school_left_year }}<span></p>
+                <div>
+                    <h3>{{ profile.university_faculty }}</h3>
+                    <p><i>{{ profile.university }}</i>({{ profile.university_gpa }} GPA) <span class="dates">{{ profile.university_joined_year }} - {{ profile.university_left_year }}  </span> </p>
+                </div>
+                <div>
+                    <h3>Higher Secondary School(+2,{{ profile.stream }})</h3>
+                    <p><i>{{ profile.college }}</i>({{ profile.college_gpa }} GPA) <span class="dates"> {{ profile.college_joined_year }} - {{ profile.college_left_year }}</span></p>
+                </div>
+                <div>
+                    <h3>Secondary School</h3>
+                    <p><i>{{ profile.school }}</i>({{ profile.school_gpa }} GPA) <span class="dates"> {{ profile.school_joined_year }} - {{ profile.school_left_year }}<span></p>
+                </div>
             </div>
         </section>
 
         <section class="cv-section">
             <h2>Projects</h2><hr>
-            <div>
-                <h3>{{ profile.project }}</h3>
-                <p> <span class="title">Description: </span>{{ profile.project_description }}</p>
-                <p><span class="title">Project Link: </span> {{ profile.project_link }}</p>
+            <div id="projects">
+                {% for project in profile.projects.all %}
+                <div class="project">
+                    <h3>{{ project.name }}</h3>
+                    <p><span class="title">Description: </span>{{ project.description }}</p>
+                    <p><span class="title">Project Link: </span> {{ project.link }}</p>
+                </div>
+                {% endfor %}
             </div>
         </section>
 
@@ -125,7 +131,11 @@
 
         <section class="cv-section">
             <h2>Languages</h2><hr>
-            <p>{{ profile.language }}</p>
+            <div id="languages">
+                {% for language in profile.languages.all %}
+                <p>{{ language }}</p>
+                {% endfor %}
+            </div>
         </section>
 
         <section class="cv-section">

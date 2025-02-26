@@ -8,7 +8,7 @@ import pandas as pd
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from .models import Profile
+from .models import Profile,Project,Language
 import pdfkit
 from django.template import loader 
 
@@ -194,27 +194,8 @@ def cv_create(request):
         university_faculty = request.POST.get('university_faculty')
         university_joined_year = request.POST.get('university_joined_year')
         university_left_year = request.POST.get('university_left_year')
-        project = request.POST.get('project')
-        project_description = request.POST.get('project_description')
-        project_link = request.POST.get('project_link')
-
-        # current_company = request.POST.get('current_company')
-        # current_position = request.POST.get('current_position')
-        # current_work_description = request.POST.get('current_work_description')
-        # current_joined_date = request.POST.get('current_joined_date')
-        # previous_company = request.POST.get('previous_company')
-        # previous_position = request.POST.get('previous_position')
-        # previous_work_description = request.POST.get('previous_work_description')
-        # previous_joined_date = request.POST.get('previous_joined_date')
-        # previous_left_date = request.POST.get('previous_left_date')     
-        # project_two = request.POST.get('project_two')
-        # project_two_description = request.POST.get('project_two_description')
-        # project_three = request.POST.get('project_three')
-        # project_three_description = request.POST.get('project_three_description')
-
         technical_skills = request.POST.get('technical_skills')
         nontechnical_skills = request.POST.get('nontechnical_skills')
-        language = request.POST.get('language')
         reference_name = request.POST.get('reference_name')
         reference_position = request.POST.get('reference_position')
         reference_organization = request.POST.get('reference_organization')
@@ -242,25 +223,8 @@ def cv_create(request):
             university_faculty=university_faculty,
             university_joined_year=university_joined_year,
             university_left_year=university_left_year,
-            project=project,
-            project_description=project_description,
-            project_link=project_link,
-            # current_company=current_company,
-            # current_position=current_position,
-            # current_work_description=current_work_description,
-            # current_joined_date=current_joined_date,
-            # previous_company=previous_company,
-            # previous_position=previous_position,
-            # previous_work_description=previous_work_description,
-            # previous_joined_date=previous_joined_date,
-            # previous_left_date=previous_left_date,
-            # project_two=project_two,
-            # project_two_description=project_two_description,
-            # project_three=project_three,
-            # project_three_description=project_three_description,
             technical_skills=technical_skills,
             nontechnical_skills=nontechnical_skills,
-            language=language,
             reference_name=reference_name,
             reference_position=reference_position,
             reference_organization=reference_organization,
@@ -268,11 +232,31 @@ def cv_create(request):
             reference_phone=reference_phone
         )
 
+        # Handle multiple projects
+        project_names = request.POST.getlist('project[]')
+        project_descriptions = request.POST.getlist('project_description[]')
+        project_links = request.POST.getlist('project_link[]')
+
+        for name, description, link in zip(project_names, project_descriptions, project_links):
+            if name:  # Only create a project if the name is not empty
+                project = Project.objects.create(
+                    name=name,
+                    description=description,
+                    link=link
+                )
+                profile.projects.add(project)
+
+        # Handle multiple languages
+        language_names = request.POST.getlist('language[]')
+        for name in language_names:
+            if name:  # Only create a language if the name is not empty
+                language, created = Language.objects.get_or_create(name=name)
+                profile.languages.add(language)
+
         profile.save()
         return redirect('cv_view', profile_id=profile.id)  # Redirect to a view page of submitted data
 
     return render(request, 'index.html')
-
 
 def cv_download(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
@@ -301,9 +285,10 @@ def list_view(request):
     return render(request, 'list.html', {'profile': profile})
 
 
-def cv_update(request,profile_id):
+def cv_update(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
     if request.method == 'POST':
+        # Update profile fields
         profile.address = request.POST.get('address')
         profile.full_name = request.POST.get('full_name')
         profile.email = request.POST.get('email')
@@ -323,20 +308,41 @@ def cv_update(request,profile_id):
         profile.university_faculty = request.POST.get('university_faculty')
         profile.university_joined_year = request.POST.get('university_joined_year')
         profile.university_left_year = request.POST.get('university_left_year')
-        profile.project = request.POST.get('project')
-        profile.project_description = request.POST.get('project_description')
-        profile.project_link = request.POST.get('project_link')
         profile.technical_skills = request.POST.get('technical_skills')
         profile.nontechnical_skills = request.POST.get('nontechnical_skills')
-        profile.language = request.POST.get('language')
         profile.reference_name = request.POST.get('reference_name')
         profile.reference_position = request.POST.get('reference_position')
         profile.reference_organization = request.POST.get('reference_organization')
         profile.reference_email = request.POST.get('reference_email')
         profile.reference_phone = request.POST.get('reference_phone')
+
+        # Handle multiple projects
+        profile.projects.clear()  # Remove existing projects
+        project_names = request.POST.getlist('project[]')
+        project_descriptions = request.POST.getlist('project_description[]')
+        project_links = request.POST.getlist('project_link[]')
+
+        for name, description, link in zip(project_names, project_descriptions, project_links):
+            if name:  # Only create a project if the name is not empty
+                project = Project.objects.create(
+                    name=name,
+                    description=description,
+                    link=link
+                )
+                profile.projects.add(project)
+
+        # Handle multiple languages
+        profile.languages.clear()  # Remove existing languages
+        language_names = request.POST.getlist('language[]')
+        for name in language_names:
+            if name:  # Only create a language if the name is not empty
+                language, created = Language.objects.get_or_create(name=name)
+                profile.languages.add(language)
+
         profile.save()
         return redirect('cv_view', profile_id=profile.id)
-    return render(request,'updatecv.html',{'profile':profile})
+
+    return render(request, 'updatecv.html', {'profile': profile})
 
 def cv_delete(request, profile_id):
     profile= get_object_or_404(Profile,id=profile_id)
