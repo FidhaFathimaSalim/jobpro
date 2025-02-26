@@ -267,6 +267,11 @@ def cv_download(request, profile_id):
     options = {
         'page-size': 'A4',
         'encoding': 'UTF-8',
+        'margin-top': '10mm',
+        'margin-right': '10mm',
+        'margin-bottom': '10mm',
+        'margin-left': '10mm',
+        'disable-smart-shrinking': '',  # Prevents automatic scaling
     }
     
     pdf = pdfkit.from_string(html, False, options=options, configuration=config)
@@ -274,7 +279,6 @@ def cv_download(request, profile_id):
     response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
     
     return response
-
 def cv_view(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request, 'cv.html',{'profile': profile})

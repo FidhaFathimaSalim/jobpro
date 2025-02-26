@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-size: 30px; /* Smaller font size for compact layout */
+            line-height: 1.9;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
@@ -16,59 +16,64 @@
 
         .cv-container {
             max-width: 800px;
-            margin: 2rem auto;
+            margin: 0 auto;
+            padding: 10px;
             background: #fff;
-            padding: 2rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .cv-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 10px;
         }
 
         .cv-header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 23px; /* Larger font size for the name */
         }
 
         .cv-header p {
-            margin: 0;
-            font-size: 1rem;
-            font-weight: 600;
+            margin: 2px 0;
+            font-size: 18px; /* Smaller font size for contact details */
         }
 
         .cv-section {
-            margin-bottom: 2rem;
+            margin-bottom: 10px;
         }
 
         .cv-section h2 {
+            font-size: 18px; /* Section headings */
+            margin: 5px 0;
             color: black;
-            display: inline-block;
-            margin-bottom: 0;
-            margin-top: 0;
+            font-weight:bold;
         }
 
         .cv-section h3 {
-            margin: 0;
+            font-size: 14px; /* Subheadings */
+            margin: 3px 0;
             color: #333;
         }
 
-        .cv-section div {
-            margin-bottom: 1rem;
-        }
-
         .cv-section p {
-            margin: 0.5rem 0;
+            margin: 2px 0;
+            font-size: 12px; /* Smaller font size for content */
         }
 
         .dates {
             display: inline;
             float: right;
+            font-size: 12px; /* Smaller font size for dates */
         }
 
         .title {
             font-weight: 600;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -133,7 +138,7 @@
             <h2>Languages</h2><hr>
             <div id="languages">
                 {% for language in profile.languages.all %}
-                <p>{{ language }}</p>
+                <p>{{ language.name }}</p>
                 {% endfor %}
             </div>
         </section>
