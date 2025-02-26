@@ -9,7 +9,7 @@ body {
 .cv-container {
     max-width: 800px;
     margin: 2rem auto;
-    background: #575656;
+    background: #fff;
     padding: 2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

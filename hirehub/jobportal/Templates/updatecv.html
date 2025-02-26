@@ -73,44 +73,15 @@
         <label for="university_left_year">University Left Year</label>
         <input type="text" id="university_left_year" name="university_left_year" value="{{profile.university_left_year}}"><br>
 
-        <div class="container2">
-            <div class="projects-header">
-                <h2>Projects</h2>
-                <button data-repeater-delete type="button" class="repeater-remove-btn">X</button>
-            </div>
-            <div data-repeater-list="projects">
-                <div data-repeater-item class="container3">
-                    <label for="project">Project:</label>
-                    <input type="text" id="project" name="project" value="{{profile.project}}"><br>
-    
-                    <label for="project_description">Project Description:</label>
-                    <textarea id="project_description" name="project_description" value="{{profile.project_description}}"></textarea><br>
-    
-                    <label for="project_link">Project Link:</label>
-                    <input type="text" id="project_link" name="project_link" value="{{profile.project_link}}"><br><br>
-                </div>
-            </div>
-            <button data-repeater-create type="button" class="repeater-add-btn">+</button>
-        </div>
-    
-<div class="container">
-    <div class="container4">
-        <div class="certificates-header">
-            <button data-repeater-delete type="button" class="repeater-remove-btn2">X</button>
-            <h2>Certificates</h2>
-        </div>
-        <div data-repeater-list="certificates">
-            <div data-repeater-item class="container3">
-                <label for="certificate">Certificate:</label>
-                <input type="text" id="certificate" name="certificate" value="{{profile.certificate}}"><br>
+        <h2>Projects</h2>
+        <label for="project">Project:</label>
+        <input type="text" id="project" name="project" value="{{profile.project}}"><br>
 
-                <label for="certificate_description">Certificate Description:</label>
-                <textarea id="certificate_description" name="certificate_description" value="{{profile.certificate_description}}"></textarea><br>
-            </div>
-        </div>
-        <button data-repeater-create type="button" class="repeater-add-btn">+</button>
-    </div>
-</div>
+        <label for="project_description">Project Description:</label>
+        <input type="text" id="project_description" name="project_description" value="{{profile.project_description}}"><br>
+
+        <label for="project_link">Project Link:</label>
+        <input type="text" id="project_link" name="project_link" value="{{profile.project_link}}"><br>
 
         <h2>Skills</h2>
         <label for="technical_skills">Technical Skills:</label>
@@ -119,20 +90,10 @@
         <label for="nontechnical_skills">Non-Technical Skills:</label>
         <input type="text" id="nontechnical_skills" name="nontechnical_skills" value="{{profile.nontechnical_skills}}"><br>
 
-        <div class="container2">
-            <div class="languages-header">
-                <h2>Languages</h2>
-                <button data-repeater-delete type="button" class="repeater-remove-btn1">X</button>
-            </div>
-            <div data-repeater-list="languages">
-                <div data-repeater-item class="container3">
-                    <label for="language">Language:</label>
-                    <input type="text" id="language" name="language"value="{{profile.language}}"><br><br>
-                </div>
-            </div>
-            <button data-repeater-create type="button" class="repeater-add-btn">+</button>
-        </div>
-    </div>
+        <h2>Language</h2>
+        <label for="language">Language:</label>
+        <input type="text" id="language" name="language" value="{{profile.language}}"><br>
+
         <h2>Reference</h2>
         <label for="reference_name">Name:</label>
         <input type="text" id="reference_name" name="reference_name" value="{{profile.reference_name}}"><br>
@@ -151,8 +112,5 @@
 
         <button type="submit">Update CV</button>
     </form>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
-<script src="{% static 'js/cv.js' %}"></script>
 </body>
 </html>
