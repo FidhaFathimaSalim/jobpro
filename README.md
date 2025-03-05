@@ -12,3 +12,7 @@ LHMS integrates with learning platforms and recommends relevant courses or train
 **2. HIREBOT**
 
 LHMS features an intelligent chatbot that interacts with candidates and answers common queries. Chatbot Implementation, the integration of a chatbot enhances user interaction by providing instant responses to queries related to job openings, skill requirements, and resume building.
+
+**3. CAREERFORGE**
+
+Create a professional resume in minutes with our easy-to-use resume builder app.Land your dream job with a standout CV.
