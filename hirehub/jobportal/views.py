@@ -136,10 +136,16 @@ def get_job_openings(query):
 def chatbot_response(message):
     """
     Function to handle chatbot responses.
+    Prioritizes dataset-based responses before falling back to generative AI.
     """
-    if 'course ' in message.lower():
+    # Check if the message is related to courses
+    if any(keyword in message.lower() for keyword in ["course"]):
+        print("The corse recommended are")
         return get_course_recommendations(message)
-    elif 'job openings' in message.lower():
+    
+    # Check if the message is related to job openings
+    elif any(keyword in message.lower() for keyword in ["job openings"]):
+        print("The job openings are")
         return get_job_openings(message)
     else:
         # If message doesn't match, call the generative AI model for general conversation
