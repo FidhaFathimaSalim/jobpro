@@ -2,17 +2,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: rgb(67, 75, 83);
 }
 
 h1, h2 {
-    color: #333;
+    color:white;
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
 }
 
 form {
-    background-color: #fff;
+    background-color: #adb5bd;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -92,7 +92,7 @@ button[type="submit"]:hover {
     align-items: center; /* Vertically center the items */
     justify-content: space-between; /* Space out the items */
     padding: 10px 20px; /* Add some padding */
-    background-color: #f8f9fa; /* Optional: Add a background color */
+    background-color: #9ebfe8; /* Optional: Add a background color */
     border-bottom: 1px solid #ddd; /* Optional: Add a border */
 }
 
