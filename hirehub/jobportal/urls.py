@@ -11,4 +11,6 @@ urlpatterns = [
     path('cv/delete/<int:profile_id>/', views.cv_delete, name='cv_delete'),
     path('cv/update/<int:profile_id>/', views.cv_update, name='cv_update'),
     path('cv/list', views.list_view, name='list_view'),
+    path('signup/', views.signup_view, name='signup'),
+    path('login/', views.login_view, name='login'),
 ]
