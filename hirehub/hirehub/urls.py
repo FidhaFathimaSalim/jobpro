@@ -22,4 +22,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('jobportal.urls')),
+    path('', include('user_auth.urls')),
 ]

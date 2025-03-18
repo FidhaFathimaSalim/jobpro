@@ -131,3 +131,8 @@ button[type="submit"]:hover {
     padding: 0px;
     margin-right: 18px;
 }
+a.buttonlog {
+    border-radius: 8px;
+    text-align: center;
+    padding: 9px;
+}
