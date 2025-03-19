@@ -85,6 +85,7 @@ def cv_create(request):
 
         # Create and save the Profile instance
         profile = Profile.objects.create(
+            user=request.user,
             full_name=full_name,
             address=address,
             email=email,
@@ -161,17 +162,19 @@ def cv_download(request, profile_id):
     
     return response
 def cv_view(request, profile_id):
-    profile = Profile.objects.get(id=profile_id)
+    profile = get_object_or_404(Profile, id=profile_id, user=request.user)
     return render(request, 'cv.html',{'profile': profile})
 
 
 def list_view(request):
-    profile= Profile.objects.all()
-    return render(request, 'list.html', {'profile': profile})
-
+    if request.user.is_authenticated:
+        profiles = Profile.objects.filter(user=request.user)  # Only show profiles created by the logged-in user
+    else:
+        profiles = Profile.objects.none()  # Return an empty queryset if the user is not logged in
+    return render(request, 'list.html', {'profiles': profiles})
 
 def cv_update(request, profile_id):
-    profile = get_object_or_404(Profile, id=profile_id)
+    profile = get_object_or_404(Profile, id=profile_id, user=request.user)
     if request.method == 'POST':
         # Update profile fields
         profile.address = request.POST.get('address')
@@ -230,7 +233,7 @@ def cv_update(request, profile_id):
     return render(request, 'updatecv.html', {'profile': profile})
 
 def cv_delete(request, profile_id):
-    profile= get_object_or_404(Profile,id=profile_id)
+    profile = get_object_or_404(Profile, id=profile_id, user=request.user)  # Ensure the profile belongs to the user
     if request.method=="POST":
         profile.delete()
         return redirect('list_view')  
