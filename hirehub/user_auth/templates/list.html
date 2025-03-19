@@ -18,6 +18,13 @@
       <div class="row m-5">
         <div class="col-md-6">
           <a href="{% url 'cv_create' %}" class="btn btn-primary">Create New</a>
+          {% if user.is_authenticated %}
+ <a class="buttonlog" style="background-color:red;border-radius: 8px;
+    text-align: center;
+    padding: 9px;;" href="{% url 'logout' %}"> Logout </a>
+ {% else %}
+ <a class="button" style="background-color:red;" href="{% url 'login' %}"> Login </a>
+ {% endif %}
         </div><br><br>
         <div class="col-md-12">
           <h2>CV Database Profile List</h2>
