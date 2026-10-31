@@ -129,13 +129,15 @@ def get_course_recommendations(keywords):
 
 # Function to get job openings based on a query
 def get_job_openings(query):
-    """
-    Function to get job openings based on a query.
-    """
-    openings = dataset[dataset['job_title'].str.contains(query, case=False)]
-    if not openings.empty:
-        return openings.to_string(index=False)
-    return "I couldn't find any job openings matching your query."
+    term = query.lower().replace("job openings", "").replace("in", "", 1).strip()
+    if not term:
+        return "Tell me a field, e.g. 'job openings in data science'."
+    mask = (dataset['Job_Category'].str.contains(term, case=False, na=False) |
+            dataset['Required_Skills'].str.contains(term, case=False, na=False))
+    rows = dataset[mask][['Job_Category', 'Job_Type', 'Required_Skills']].drop_duplicates().head(5)
+    if rows.empty:
+        return "I couldn't find any job openings matching your query."
+    return rows.to_string(index=False)
 
 # Function to handle general chatbot responses
 def chatbot_response(message):
