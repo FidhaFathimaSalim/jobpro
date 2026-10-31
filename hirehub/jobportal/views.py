@@ -193,9 +193,9 @@ def chatbot_response(message):
         return response.text
 
 # Hirebot view to handle chat interactions
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 
-@csrf_exempt  # Exempt CSRF check for the sake of development (use proper CSRF token in production)
+@ensure_csrf_cookie
 def hirebot(request):
     """
     View function to handle chat interactions.

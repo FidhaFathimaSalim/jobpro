@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect,get_object_or_404
+import os
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Profile,Project,Language
+from .models import Profile, Project, Language
 from .forms import CreateUserForm
 import pdfkit
 from django.template import loader 
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def registerPage(request):
@@ -51,7 +51,6 @@ def logoutUser(request):
 	logout(request)
 	return redirect('login')
 
-@csrf_exempt
 @login_required(login_url='login')
 def cv_create(request):
     if request.method == 'POST':
@@ -140,12 +139,13 @@ def cv_create(request):
 
     return render(request, 'index.html')
 
+@login_required(login_url='login')
 def cv_download(request, profile_id):
-    profile = Profile.objects.get(id=profile_id)
+    profile = get_object_or_404(Profile, id=profile_id, user=request.user)
     template = loader.get_template('pdf.html')
     html = template.render({'profile': profile})
     
-    config = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")  
+    config = pdfkit.configuration(wkhtmltopdf=os.environ.get("WKHTMLTOPDF_PATH")) if os.environ.get("WKHTMLTOPDF_PATH") else None  
     options = {
         'page-size': 'A4',
         'encoding': 'UTF-8',
@@ -173,6 +173,7 @@ def list_view(request):
         profiles = Profile.objects.none()  # Return an empty queryset if the user is not logged in
     return render(request, 'list.html', {'profiles': profiles})
 
+@login_required(login_url='login')
 def cv_update(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id, user=request.user)
     if request.method == 'POST':
@@ -232,6 +233,7 @@ def cv_update(request, profile_id):
 
     return render(request, 'updatecv.html', {'profile': profile})
 
+@login_required(login_url='login')
 def cv_delete(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id, user=request.user)  # Ensure the profile belongs to the user
     if request.method=="POST":

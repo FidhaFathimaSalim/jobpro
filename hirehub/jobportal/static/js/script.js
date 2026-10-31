@@ -21,6 +21,7 @@ function generateResponse(aiChatBox) {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': (document.cookie.split('; ').find(r => r.startsWith('csrftoken=')) || '').split('=')[1]
         },
         body: JSON.stringify(requestData)
     })

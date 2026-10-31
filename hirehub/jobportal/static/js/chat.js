@@ -30,7 +30,10 @@ const generateResponse = async (chatElement) => {
   // Define the properties and message for the API request
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      'X-CSRFToken': (document.cookie.split('; ').find(r => r.startsWith('csrftoken=')) || '').split('=')[1]
+    },
     body: JSON.stringify({ 
       contents: [{ 
         role: "user", 
