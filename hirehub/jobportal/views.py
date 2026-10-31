@@ -1,3 +1,11 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+APP_DIR = Path(__file__).resolve().parent
+load_dotenv(APP_DIR.parent / ".env")
+DATA_PATH = APP_DIR / "job_dataset.csv"
+
 # views.py
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.http import HttpResponse, JsonResponse
@@ -53,8 +61,7 @@ class JobRecommender:
             exit(1)
 
 # Load the data
-file_path = 'C:\\Users\\huawei\\Desktop\\jobpro\\hirehub\\jobportal\\job_dataset.csv'  # Replace with your actual file path
-job_data = JobRecommender.load_data(file_path)
+job_data = JobRecommender.load_data(DATA_PATH)
 
 # Create an instance of the recommender
 recommender = JobRecommender(job_data)
@@ -75,13 +82,13 @@ def recommend_jobs(request):
     return render(request, 'recommend_jobs.html')
 
 # Load your dataset (make sure the path is correct in your local environment)
-dataset = pd.read_csv('C:\\Users\\huawei\\Desktop\\jobpro\\hirehub\\jobportal\\job_dataset.csv')
+dataset = job_data.copy()
 
 # Configure the generative AI model
-genai.configure(api_key="AIzaSyBdVNTdrfjHvb-IKMBACdlkJzvd_r4SETE")
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 instruction = "You are a chatbot which provides job openings, resume building, skill requirements. It also provides course recommendations using the below dataset."
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name=os.environ.get("GEMINI_MODEL", "gemini-1.5-flash"),
     system_instruction=instruction
 )
 
