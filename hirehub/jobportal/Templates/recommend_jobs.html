@@ -72,14 +72,47 @@
             <form  method="post" id="recommendation-form">
               {% csrf_token %}
                 <label for="user_skills">Enter your skills (comma-separated):</label>
-                <input type="text" id="user_skills" name="user_skills" required>
+                <input type="text" id="user_skills" name="user_skills" value="{{ user_skills|default:'' }}" required>
                 <label for="required_skills">Enter required skills for the job (comma-separated):</label>
-                <input type="text" id="required_skills" name="required_skills" required>
+                <input type="text" id="required_skills" name="required_skills" value="{{ required_skills|default:'' }}" required>
+                <label for="job_category">Job Category (optional):</label>
+                <select id="job_category" name="job_category" style="margin-bottom: 15px; padding: 6px 12px; border-radius: 8px; width: 100%; color: #333;">
+                  <option value="">-- Auto-detect from skills / recommendations --</option>
+                  <option value="Data Science" {% if job_category == 'Data Science' %}selected{% endif %}>Data Science</option>
+                  <option value="Software Development" {% if job_category == 'Software Development' %}selected{% endif %}>Software Development</option>
+                  <option value="Data Analysis" {% if job_category == 'Data Analysis' %}selected{% endif %}>Data Analysis</option>
+                  <option value="Graphic Design" {% if job_category == 'Graphic Design' %}selected{% endif %}>Graphic Design</option>
+                  <option value="Finance" {% if job_category == 'Finance' %}selected{% endif %}>Finance</option>
+                  <option value="Customer Service" {% if job_category == 'Customer Service' %}selected{% endif %}>Customer Service</option>
+                  <option value="Marketing" {% if job_category == 'Marketing' %}selected{% endif %}>Marketing</option>
+                </select>
                 <button class="recg" type="submit">Get Recommendations</button>
             </form>
             <div id="results">
+              {% if skills_have or skills_to_learn %}
+                <div class="skill-gap-analysis" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); text-align: left;">
+                  {% if skills_have %}
+                    <h4 style="color: #4ade80; margin-bottom: 10px; font-size: 1.15rem;"><i class="bi bi-check-circle-fill"></i> Skills you have:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+                      {% for skill in skills_have %}
+                        <span style="background: rgba(74, 222, 128, 0.2); border: 1px solid #4ade80; color: #4ade80; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem;">{{ skill }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+
+                  {% if skills_to_learn %}
+                    <h4 style="color: #facc15; margin-bottom: 10px; font-size: 1.15rem;"><i class="bi bi-lightbulb-fill"></i> Skills to learn:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                      {% for skill in skills_to_learn %}
+                        <span style="background: rgba(250, 204, 21, 0.2); border: 1px solid #facc15; color: #facc15; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem;">{{ skill }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+
               {% if recommended_jobs %}
-                <h3>Recommended Courses:</h3>
+                <h3 style="padding: 15px 15px 0 15px; text-align: left;">Recommended Courses:</h3>
                 <ul>
                     {% for job in recommended_jobs %}
                       <li>
@@ -90,7 +123,7 @@
                     {% endfor %}
                 </ul>
               {% else %}
-                <p>No courses found matching your input.</p>
+                <p style="padding: 15px;">No courses found matching your input.</p>
               {% endif %}
           </div>
         <!-- Chatbot HTML -->

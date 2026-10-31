@@ -23,7 +23,9 @@ class JobRecommender:
         self.job_data = job_data
         self.job_data['Required_Skills'] = self.job_data['Required_Skills'].fillna('')  # Replace NaN with empty string
         self.vectorizer = TfidfVectorizer(stop_words='english')
-        self.tfidf_matrix = self.vectorizer.fit_transform(self.job_data['Title'])
+        self.job_data['Title'] = self.job_data['Title'].fillna('')
+        text = self.job_data['Title'] + ' ' + self.job_data['Required_Skills']
+        self.tfidf_matrix = self.vectorizer.fit_transform(text)
 
     def recommend_jobs(self, user_skills, required_skills, top_n=5):
         if not user_skills.strip() or not required_skills.strip():
@@ -44,6 +46,14 @@ class JobRecommender:
         # Fetch the recommended jobs
         recommended_jobs = self.job_data.iloc[top_indices]
         return recommended_jobs[['Title',  'URL']]
+
+    def skill_gap(self, user_skills, job_category):
+        rows = self.job_data[self.job_data['Job_Category'].str.lower() == job_category.lower()]
+        required = set()
+        for s in rows['Required_Skills']:
+            required.update(x.strip().lower() for x in str(s).split(',') if x.strip())
+        have = {x.strip().lower() for x in user_skills.split(',') if x.strip()}
+        return sorted(required - have), sorted(required & have)
 
     @staticmethod
     def load_data(file_path):
@@ -73,11 +83,34 @@ def recommend_jobs(request):
     if request.method == 'POST':
         user_skills = request.POST.get('user_skills', '')
         required_skills = request.POST.get('required_skills', '')
+        job_category = request.POST.get('job_category', '').strip()
         
         # Call the recommendation function
         recommended_jobs = recommender.recommend_jobs(user_skills, required_skills)
 
-        return render(request, 'recommend_jobs.html', {'recommended_jobs': recommended_jobs.to_dict(orient='records')})
+        # Determine job category for skill gap analysis
+        category = job_category
+        if not category:
+            for cat in recommender.job_data['Job_Category'].dropna().unique():
+                if cat.lower() in required_skills.lower() or required_skills.lower() in cat.lower():
+                    category = cat
+                    break
+        if not category and not recommended_jobs.empty:
+            top_title = recommended_jobs.iloc[0]['Title']
+            matched = recommender.job_data[recommender.job_data['Title'] == top_title]
+            if not matched.empty:
+                category = matched.iloc[0]['Job_Category']
+
+        skills_to_learn, skills_have = recommender.skill_gap(user_skills, category) if category else ([], [])
+
+        return render(request, 'recommend_jobs.html', {
+            'recommended_jobs': recommended_jobs.to_dict(orient='records'),
+            'skills_have': skills_have,
+            'skills_to_learn': skills_to_learn,
+            'user_skills': user_skills,
+            'required_skills': required_skills,
+            'job_category': category,
+        })
     
     return render(request, 'recommend_jobs.html')
 
